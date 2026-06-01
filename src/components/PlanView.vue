@@ -3,6 +3,7 @@ import { ref, computed } from 'vue'
 import { useTrainingStore } from '../stores/trainingStore.js'
 import { loadDailyPlans, saveDailyPlans } from '../utils/storage.js'
 import { formatDate } from '../utils/format.js'
+import { scheduleBackup } from '../utils/backup.js'
 import PlanForm from './PlanForm.vue'
 import TrainingForm from './TrainingForm.vue'
 
@@ -45,7 +46,7 @@ const editingPlanDate = ref(null)
 const editingTrainingId = ref(null)
 const newTrainingDate = ref(null)
 
-function persist() { saveDailyPlans(plans.value) }
+function persist() { saveDailyPlans(plans.value); scheduleBackup() }
 
 function findAnchor() {
   const today = new Date(); today.setHours(0, 0, 0, 0)

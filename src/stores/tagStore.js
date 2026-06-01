@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { loadTags, saveTags } from '../utils/storage.js'
+import { scheduleBackup } from '../utils/backup.js'
 
 export const useTagStore = defineStore('tags', () => {
   const tags = ref(loadTags())
@@ -8,6 +9,7 @@ export const useTagStore = defineStore('tags', () => {
 
   function persist() {
     saveTags(tags.value)
+    scheduleBackup()
   }
 
   function create(name, color = '#4a90d9') {

@@ -199,6 +199,31 @@ app.put('/api/docs/rename', (req, res) => {
   }
 })
 
+// ---- backup ----
+const BACKUP_DIR = path.join(__dirname, '备份')
+
+app.post('/api/backup', (req, res) => {
+  try {
+    if (!fs.existsSync(BACKUP_DIR)) {
+      fs.mkdirSync(BACKUP_DIR, { recursive: true })
+    }
+    const { trainings, tags, notes, plan, dailyPlans } = req.body
+    const ts = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19)
+    const file = path.join(BACKUP_DIR, `自动备份_${ts}.json`)
+    fs.writeFileSync(file, JSON.stringify({ trainings, tags, notes, plan, dailyPlans, backupAt: new Date().toISOString() }, null, 2), 'utf-8')
+
+    // keep only latest 10 backups
+    const files = fs.readdirSync(BACKUP_DIR).filter(f => f.endsWith('.json')).sort()
+    while (files.length > 10) {
+      fs.unlinkSync(path.join(BACKUP_DIR, files.shift()))
+    }
+
+    res.json({ ok: true, file })
+  } catch (err) {
+    res.status(500).json({ error: err.message })
+  }
+})
+
 const PORT = 3001
 app.listen(PORT, () => {
   console.log(`Docs API server running at http://localhost:${PORT}`)

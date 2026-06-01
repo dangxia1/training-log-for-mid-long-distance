@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { loadTrainings, saveTrainings } from '../utils/storage.js'
+import { scheduleBackup } from '../utils/backup.js'
 
 export const useTrainingStore = defineStore('trainings', () => {
   const raw = loadTrainings()
@@ -13,6 +14,7 @@ export const useTrainingStore = defineStore('trainings', () => {
 
   function persist() {
     saveTrainings(trainings.value)
+    scheduleBackup()
   }
 
   function create(data) {
