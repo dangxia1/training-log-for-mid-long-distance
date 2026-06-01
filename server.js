@@ -200,7 +200,7 @@ app.put('/api/docs/rename', (req, res) => {
 })
 
 // ---- backup ----
-const BACKUP_DIR = path.join(__dirname, '备份')
+const BACKUP_DIR = path.join(__dirname, 'backups')
 
 app.post('/api/backup', (req, res) => {
   try {
@@ -209,7 +209,7 @@ app.post('/api/backup', (req, res) => {
     }
     const { trainings, tags, notes, plan, dailyPlans } = req.body
     const ts = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19)
-    const file = path.join(BACKUP_DIR, `自动备份_${ts}.json`)
+    const file = path.join(BACKUP_DIR, `自动backups_${ts}.json`)
     fs.writeFileSync(file, JSON.stringify({ trainings, tags, notes, plan, dailyPlans, backupAt: new Date().toISOString() }, null, 2), 'utf-8')
 
     // keep only latest 10 backups
