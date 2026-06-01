@@ -3,5 +3,6 @@ dist/
 .agents/
 .claude/
 docs/
+CLAUDE.md
 skills-lock.json
 训练数据导入.json
