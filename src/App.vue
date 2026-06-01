@@ -1,10 +1,12 @@
 <script setup>
 import { ref, computed, nextTick } from 'vue'
+import { defineAsyncComponent } from 'vue'
 import PlanView from './components/PlanView.vue'
-import TrainingPlan from './components/TrainingPlan.vue'
 import TrainingTypeView from './components/TrainingTypeView.vue'
 import TrainingForm from './components/TrainingForm.vue'
 import DataIO from './components/DataIO.vue'
+
+const TrainingPlan = defineAsyncComponent(() => import('./components/TrainingPlan.vue'))
 
 const activeTab = ref('dailyplan')
 const showDataIO = ref(false)
