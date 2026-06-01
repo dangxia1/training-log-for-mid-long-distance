@@ -2,5 +2,6 @@ node_modules/
 dist/
 .agents/
 .claude/
+docs/
 skills-lock.json
 训练数据导入.json
