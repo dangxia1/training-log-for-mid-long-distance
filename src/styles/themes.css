@@ -1,0 +1,178 @@
+/* ============================================================
+   Editorial Theme System
+   Magazine/editorial aesthetic: serif headlines, generous
+   whitespace, ink-on-paper palette, single restrained accent.
+   ============================================================ */
+
+:root {
+  /* ---- Typography ---- */
+  --font-display: 'Playfair Display', 'Noto Serif SC', 'STSong', 'SimSun', 'Songti SC', serif;
+  --font-body: 'Inter', 'Noto Serif SC', system-ui, -apple-system, sans-serif;
+  --font-mono: 'SF Mono', 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+
+  /* ---- Motion ---- */
+  --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast: 180ms;
+  --dur-normal: 300ms;
+  --dur-slow: 500ms;
+
+  /* ---- Z-index ---- */
+  --z-nav: 20;
+  --z-fab: 50;
+  --z-overlay: 100;
+
+  /* ---- Radii ---- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  /* ---- Editorial palette: Light (default) ---- */
+  --bg-body: #faf8f3;              /* warm off-white paper */
+  --bg-surface: #f5f2eb;           /* slightly darker paper */
+  --bg-card: #fefdfa;              /* bright card surface */
+  --bg-hover: #f0ede5;             /* hover tint */
+  --bg-input: #f8f6f1;
+
+  --text-primary: #1a1714;         /* deep ink, not pure black */
+  --text-secondary: #5c5852;       /* muted ink */
+  --text-tertiary: #96928a;        /* light ink */
+  --text-placeholder: #b8b4ac;
+
+  /* Accent — deep burgundy (editorial red) */
+  --accent: #8b3a3a;
+  --accent-rgb: 139, 58, 58;
+  --accent-light: #f5eaea;
+  --accent-soft: #faf3f3;
+  --accent-muted: #6b2c2c;
+
+  /* Borders & dividers */
+  --border: #e8e4dc;
+  --border-light: #f0ede6;
+  --border-hairline: #e0dcd4;
+
+  /* Plan / anchor — muted gold */
+  --plan-accent: #b89450;
+  --plan-accent-rgb: 184, 148, 80;
+  --plan-bg: #fbf8ed;
+  --plan-border: #e0d8b8;
+
+  /* Star */
+  --star: #b89450;
+
+  /* Danger */
+  --danger: #b84444;
+  --danger-hover: #c85050;
+  --danger-bg: #fcf2f2;
+  --danger-border: #f0d8d8;
+
+  /* Success */
+  --success-bg: #eaf4ec;
+  --success-text: #2d6a42;
+
+  /* Code */
+  --code-bg: #f2f0ec;
+  --code-text: #a04040;
+
+  /* Misc */
+  --overlay: rgba(20, 18, 16, 0.45);
+  --scrollbar: #d4d0c8;
+  --scrollbar-hover: #b0aca4;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.03);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.06);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.10);
+}
+
+/* ---- Dark mode ---- */
+[data-theme="dark"] {
+  --bg-body: #141210;
+  --bg-surface: #1c1a16;
+  --bg-card: #201e1a;
+  --bg-hover: #282520;
+  --bg-input: #1e1c18;
+
+  --text-primary: #e8e4dc;
+  --text-secondary: #a09a90;
+  --text-tertiary: #706a60;
+  --text-placeholder: #585248;
+
+  --accent: #c46868;
+  --accent-rgb: 196, 104, 104;
+  --accent-light: #2a1c1c;
+  --accent-soft: #1e1818;
+  --accent-muted: #d48080;
+
+  --border: #2c2820;
+  --border-light: #242018;
+  --border-hairline: #302c24;
+
+  --plan-accent: #c8a458;
+  --plan-accent-rgb: 200, 164, 88;
+  --plan-bg: #201e14;
+  --plan-border: #3a3418;
+
+  --star: #c8a458;
+  --danger: #d06060;
+  --danger-hover: #e07878;
+  --danger-bg: #281818;
+  --danger-border: #402020;
+
+  --success-bg: #18281c;
+  --success-text: #5cac78;
+
+  --code-bg: #282420;
+  --code-text: #d08080;
+
+  --overlay: rgba(0,0,0,0.60);
+  --scrollbar: #302c24;
+  --scrollbar-hover: #484438;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.15);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.25);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.35);
+}
+
+/* ---- Dark markdown overrides ---- */
+[data-theme="dark"] .markdown-body :deep(code) {
+  background: var(--code-bg); color: var(--code-text);
+}
+[data-theme="dark"] .markdown-body :deep(pre) {
+  background: var(--bg-surface); border-color: var(--border);
+}
+[data-theme="dark"] .markdown-body :deep(pre code) { color: var(--text-primary); }
+[data-theme="dark"] .markdown-body :deep(blockquote) {
+  background: var(--accent-soft); color: var(--text-secondary);
+}
+[data-theme="dark"] .markdown-body :deep(th) { background: var(--bg-hover); }
+[data-theme="dark"] .markdown-body :deep(table th),
+[data-theme="dark"] .markdown-body :deep(table td) { border-color: var(--border); }
+[data-theme="dark"] .markdown-body :deep(hr) { border-top-color: var(--border); }
+[data-theme="dark"] .markdown-body :deep(h1),
+[data-theme="dark"] .markdown-body :deep(h2) { border-bottom-color: var(--border); }
+[data-theme="dark"] .markdown-body :deep(h1),
+[data-theme="dark"] .markdown-body :deep(h2),
+[data-theme="dark"] .markdown-body :deep(h3),
+[data-theme="dark"] .markdown-body :deep(h4) { color: var(--text-primary); }
+[data-theme="dark"] .markdown-body :deep(a) { color: var(--accent); }
+
+/* hljs dark */
+[data-theme="dark"] .markdown-body :deep(.hljs) { background: #1a1814; color: #d0ccc4; }
+[data-theme="dark"] .markdown-body :deep(.hljs-keyword),
+[data-theme="dark"] .markdown-body :deep(.hljs-selector-tag),
+[data-theme="dark"] .markdown-body :deep(.hljs-literal),
+[data-theme="dark"] .markdown-body :deep(.hljs-section) { color: #c08080; }
+[data-theme="dark"] .markdown-body :deep(.hljs-string),
+[data-theme="dark"] .markdown-body :deep(.hljs-title),
+[data-theme="dark"] .markdown-body :deep(.hljs-name),
+[data-theme="dark"] .markdown-body :deep(.hljs-type) { color: #c8a060; }
+[data-theme="dark"] .markdown-body :deep(.hljs-comment),
+[data-theme="dark"] .markdown-body :deep(.hljs-quote) { color: #6a9070; }
+[data-theme="dark"] .markdown-body :deep(.hljs-number),
+[data-theme="dark"] .markdown-body :deep(.hljs-regexp) { color: #a0b880; }
+[data-theme="dark"] .markdown-body :deep(.hljs-function) { color: #c8c080; }
+[data-theme="dark"] .markdown-body :deep(.hljs-built_in) { color: #60a890; }
+[data-theme="dark"] .markdown-body :deep(.hljs-attr),
+[data-theme="dark"] .markdown-body :deep(.hljs-params) { color: #80b0c8; }
+
+[data-theme="dark"] .markdown-body :deep(.mermaid-svg) { background: #1a1814; }
+[data-theme="dark"] .markdown-body :deep(.katex) { color: #d0ccc4; }
